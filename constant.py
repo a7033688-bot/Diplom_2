@@ -1,6 +1,8 @@
-url = 'https://stellarburgers.education-services.ru/'
-user_creation = 'api/auth/register'
-user_delete = 'api/auth/user'
-user_authorization = 'api/auth/login'
-data_about_ingredient = 'api/ingredients'
-order_cretion = 'api/orders'
+class Url:
+    
+    url = 'https://stellarburgers.education-services.ru/'
+    user_creation = 'api/auth/register'
+    user_delete = 'api/auth/user'
+    user_authorization = 'api/auth/login'
+    data_about_ingredient = 'api/ingredients'
+    order_cretion = 'api/orders'

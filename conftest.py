@@ -1,17 +1,18 @@
 import pytest
-import requests
 import copy
-from constant import url, user_creation, user_delete
+from api_client import ApiClient
 from helpers import generate_user
 
 @pytest.fixture()
 def clear():
     user = generate_user()
-    response = requests.post(url + user_creation, json=user)
-    assert response.status_code ==200 ,f'регистрация не удалась {response.text}'
+    client = ApiClient()
+    response = client.user_creation(user)
+    assert response.status_code ==200 
     token =response.json()['accessToken']
     user = copy.deepcopy(user)
-    yield user 
-    requests.delete(url + user_delete, headers={'Authorization': token}) 
-
+    try:
+        yield user, token
+    finally:
+        client.user_delete(token) 
 
