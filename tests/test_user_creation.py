@@ -10,8 +10,11 @@ class TestUserCreation:
         user = ApiClient()
         response = user.user_creation(client)
         token = response.json()['accessToken']
-        response = user.user_delete(token)
-        assert response.status_code == 202
+        user.user_delete(token)
+        assert response.status_code == 200
+        body = response.json()
+        assert body['success'] is True
+        assert body['user']['email'] == client['email']
 
     @allure.title('создание пользователя который уже зарегистрирован')
     def test_create_user_who_is_already_registered(self,clear):
